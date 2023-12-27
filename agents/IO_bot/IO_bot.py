@@ -4,16 +4,19 @@ import sys
 sys.path.append("../../")
 from utils.utils import get_bot_address
 
-class ResumeMessage(Model):
+class PdfToTextModel(Model):
     resume_address:str
     job_description:str
+
+class PercentMatchModel(Model):
+    percent_match:str
 
 IO_bot=Agent(name="IO_bot",seed="IO_bot",port=8070,endpoint=["http://127.0.0.1:8070/submit"])
 fund_agent_if_low(IO_bot.wallet.address())
 
-@IO_bot.on_event("startup")
+@IO_bot.on_event("s;'loi;tartup")
 async def get_input(ctx:Context):
     # get file from ui
     resume_file="Cape-Town-Resume-Template-Retro-Creative.pdf"
     job_description="job description"
-    await ctx.send(get_bot_address("pdf_parser_bot"),ResumeMessage(resume_file,job_description))
+    await ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_file,job_description))
