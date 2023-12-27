@@ -27,21 +27,23 @@ async def get_input(ctx:Context):
     job_description=get_job_description()
     if(job_description):
         for r in resumes:
-            resume_file=os.path.join(os.getcwd(),"agents/IO_bot/input_resumes",r)
+            resume_file=os.path.join(os.getcwd(),"agents\IO_bot\input_resumes",r)
             file_name=r
             job_description=job_description
-    await ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_address="resume_file",job_description="job_description",file_name="file_name"))
+            await ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_address=resume_file,job_description=job_description,file_name=file_name))
 
 @IO_bot.on_message(model=PercentMatchModel)
 async def display_match(ctx: Context, sender: str, msg: PercentMatchModel):
     percent_match=msg.percent_match
     file_name=msg.file_name
+    global ranked_resumes
+    global no_of_resumes
     ranked_resumes.append([percent_match,file_name])
     if(len(ranked_resumes)==no_of_resumes):
         ranked_resumes=sorted(ranked_resumes,reverse=True)
         rank=1
-        message="Rank\tFile name"
+        message="\nRank\tFile name\n"
         for r in ranked_resumes:
             message+=f"{rank}\t{r[1]}\n"
             rank+=1
-    ctx.logger.info(msg.percent_match)
+        ctx.logger.info(message)
