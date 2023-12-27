@@ -18,41 +18,6 @@ uploadedResume = st.file_uploader("Upload resume",type="pdf",accept_multiple_fil
 click = st.button("Process")
 print(uploadedJD)
 
-todocomment = '''
-try:
-    global job_description
-    with pdfplumber.open(uploadedJD) as pdf:
-        pages = pdf.pages[0]
-        job_description = pages.extract_text()
-        
-
-except:
-    st.write("bro")
-    
-    
-try:
-    global resume
-    with  pdfplumber.open(uploadedResume) as pdf:
-        pages = pdf.pages[0]
-        resume = pages.extract_text()
-        print(resume)
-except:
-    st.write("asdfasdf")
-'''
-
-#logic
-def getResult(JD_txt,resume_txt):
-    content = [JD_txt,resume_txt]
-
-    cv = CountVectorizer()
-
-    matrix = cv.fit_transform(content)
-
-    similarity_matrix =  cosine_similarity(matrix)
-
-    match = similarity_matrix[0][1] * 100
-
-    return match
 
 
 #button 

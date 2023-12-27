@@ -5,7 +5,7 @@ from agents.keyword_parser_bot.keyword_parser_bot import keyword_parser_bot
 from agents.filtering_bot.filtering_bot import filtering_bot
 
 if __name__ == "__main__":
-    bureau = Bureau(endpoint=["http://127.0.0.1:8069/submit"], port=8069) # Create a bereau to manage bot interaction
+    bureau = Bureau(endpoint=["http://127.0.0.1:8069/submit"], port=8069) # Create a bureau to manage bot interaction
     
     print(f"Activating {pdf_parser_bot.name}")
     bureau.add(pdf_parser_bot) 
