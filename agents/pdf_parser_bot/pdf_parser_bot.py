@@ -2,9 +2,6 @@ from uagents import Agent,Context,Model
 from uagents.setup import fund_agent_if_low
 
 
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-
 
 from PyPDF2 import PdfReader
 import sys
@@ -25,6 +22,9 @@ pdf_parser_bot=Agent(name="pdf_parser_bot",seed="pdf_parser_bot",port=8072,endpo
 fund_agent_if_low(pdf_parser_bot.wallet.address())
 
 
+
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 
 def RemoveStopwords(sentence): 
     stop_words = set(stopwords.words('english'))
@@ -58,7 +58,6 @@ async def pdf_to_text(ctx: Context, sender: str, msg: PdfToTextModel):
     resume_cleaned = RemoveStopwords(resume_cleaned)
     description_cleaned = RemoveStopwords(description_cleaned)
 
-    # ctx.logger.info(f"recieved {msg.resume_address} from {ctx.name}") dfd
-    resume_text=transcript
-    await ctx.send(get_bot_address("filtering_bot"),TextToFilterModel(content=resume_text,job_description=msg.job_description,file_name=msg.file_name))
+    # ctx.logger.info(f"recieved {msg.resume_address} from {ctx.name}")
+    await ctx.send(get_bot_address("filtering_bot"),TextToFilterModel(content=resume_cleaned,job_description=description_cleaned,file_name=msg.file_name))
 
