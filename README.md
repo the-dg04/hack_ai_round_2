@@ -2,7 +2,7 @@
 
 Setting Up
 1. Install requirements using the command below
-`pip install -r requirements.txt`
+`pip install -r requirements.txt` & run `python ./ntlk-setup.py`
 2. Write the job description into agents/IO_bot/job_description.txt according to which the filtering is to be done.
 3. Save all the PDFs of the resumes into the agents/IO_bot/input_resumes folder
 4. Run main.py
@@ -23,4 +23,4 @@ On the basis of this, the filtering bot sends the message containing the percent
 thus this completes the whole uAgents chain
 
 
-check out the similarity.ipynb file to see out alternate approaches
+check out the similarity.ipynb file to see our alternate approaches on how to generate similarity scores using alernate NLP models
