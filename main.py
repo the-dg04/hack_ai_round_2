@@ -16,6 +16,3 @@ if __name__ == "__main__":
     print(f"Activating {filtering_bot.name}")
     bureau.add(filtering_bot) 
     bureau.run() # Run the bereau
-
-
-
