@@ -1,5 +1,13 @@
 # hack_ai_round_2
-Jamboard link : https://jamboard.google.com/d/1lkYk05ZJKcWYUA9-I39ODegtXWWm0dvxSaSfNMBq8iw/viewer?f=0
+Installation
+1. Run the following command to install the required packages
+`pip install -r requirements.txt`
+2. Write the job description into job_description.txt according to which the filtering is to be done.
+3. Save all the PDFs of the resumes into the agents/IO_bot/input resumes folder
+4. Run main.py
+5. That's it! Now you will receive the compolete
+
+
 
 For our approach to the problem statement we use the flow of the following uAgents 
 
