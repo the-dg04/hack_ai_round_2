@@ -15,21 +15,16 @@ class PercentMatchModel(Model):
     percent_match:float
     file_name:str
 
-class Message(Model):
-    message:str
-
 IO_bot=Agent(name="IO_bot",seed="IO_bot",port=8070,endpoint=["http://127.0.0.1:8070/submit"])
 fund_agent_if_low(IO_bot.wallet.address())
 
-@IO_bot.on_event("startup")
-async def get_input(ctx:Context):
-    # get file from ui
-    
-
-    resume_file="Cape-Town-Resume-Template-Retro-Creative.pdf"
-    file_name="dsjdsjdskjkjfds.pdf"
-    job_description="job description"
-    await ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_address=resume_file,job_description=job_description,file_name=file_name))
+# @IO_bot.on_event("startup")
+# async def get_input(ctx:Context):
+#     # get file from ui
+#     resume_file="Cape-Town-Resume-Template-Retro-Creative.pdf"
+#     file_name="dsjdsjdskjkjfds.pdf"
+#     job_description="job description"
+#     await Agent(seed="pdf_parser_bot")._ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_address=resume_file,job_description=job_description,file_name=file_name))
 
 @IO_bot.on_message(model=PercentMatchModel)
 async def display_match(ctx: Context, sender: str, msg: PercentMatchModel):

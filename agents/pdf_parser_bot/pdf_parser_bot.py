@@ -22,6 +22,7 @@ async def pdf_to_text(ctx: Context, sender: str, msg: PdfToTextModel):
     pdf_file=msg.resume_address
 
     # convert pdf to text here
-    ctx.logger.info(f"recieved {msg.resume_address}")
+    ctx.logger.info(f"recieved {msg.resume_address} from {ctx.name}")
     resume_text="sample text"
     await ctx.send(get_bot_address("keyword_parser_bot"),TextToKeywordsModel(content=resume_text,job_description=msg.job_description,file_name=msg.file_name))
+
