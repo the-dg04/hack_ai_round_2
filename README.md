@@ -2,8 +2,8 @@
 Installation
 1. Run the following command to install the required packages
 `pip install -r requirements.txt`
-2. Write the job description into job_description.txt according to which the filtering is to be done.
-3. Save all the PDFs of the resumes into the agents/IO_bot/input resumes folder
+2. Write the job description into agents/IO_bot/job_description.txt according to which the filtering is to be done.
+3. Save all the PDFs of the resumes into the agents/IO_bot/input_resumes folder
 4. Run main.py
 5. That's it! Now you will receive the compolete
 
