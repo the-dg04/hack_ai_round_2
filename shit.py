@@ -1,51 +1,66 @@
-import tkinter as tk
-from tkinter import filedialog
+import streamlit as st 
 
-def generate_output():
-    file1 = file1_entry.get()
-    file2 = file2_entry.get()
-    # Perform the necessary operations with the selected files here
-    # For example, you can print their paths for demonstration
-    print("File 1:", file1)
-    print("File 2:", file2)
-    # Add your logic here to generate output using the selected files
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
-def select_file1():
-    file1 = filedialog.askopenfilename()
-    file1_entry.delete(0, tk.END)
-    file1_entry.insert(tk.END, file1)
+st.title("Automated Resume Screening and Matching Agent")
 
-def select_file2():
-    file2 = filedialog.askopenfilename()
-    file2_entry.delete(0, tk.END)
-    file2_entry.insert(tk.END, file2)
+st.subheader("Hack-AI")
 
-# Create the main window
-root = tk.Tk()
-root.title("File Selector")
+st.caption("""Aim is to Develop an agent that can intelligently
+screen and match resumes with job descriptions. The agent should use natural language
+processing (NLP) and machine learning techniques to understand the requirements listed in a
+job description and evaluate resumes based on these criteria.""")
 
-# File 1
-file1_label = tk.Label(root, text="Select File 1:")
-file1_label.pack()
+uploadedJD = st.file_uploader("Upload Job Description", type="pdf")
 
-file1_entry = tk.Entry(root, width=50)
-file1_entry.pack()
+uploadedResume = st.file_uploader("Upload resume",type="pdf",accept_multiple_files=True)
 
-file1_button = tk.Button(root, text="Browse", command=select_file1)
-file1_button.pack()
+click = st.button("Process")
 
-# File 2
-file2_label = tk.Label(root, text="Select File 2:")
-file2_label.pack()
 
-file2_entry = tk.Entry(root, width=50)
-file2_entry.pack()
+todocomment = '''
+try:
+    global job_description
+    with pdfplumber.open(uploadedJD) as pdf:
+        pages = pdf.pages[0]
+        job_description = pages.extract_text()
+        
 
-file2_button = tk.Button(root, text="Browse", command=select_file2)
-file2_button.pack()
+except:
+    st.write("bro")
+    
+    
+try:
+    global resume
+    with  pdfplumber.open(uploadedResume) as pdf:
+        pages = pdf.pages[0]
+        resume = pages.extract_text()
+        print(resume)
+except:
+    st.write("asdfasdf")
+'''
 
-# Generate Button
-generate_button = tk.Button(root, text="Generate", command=generate_output)
-generate_button.pack()
+#logic
+def getResult(JD_txt,resume_txt):
+    content = [JD_txt,resume_txt]
 
-root.mainloop()
+    cv = CountVectorizer()
+
+    matrix = cv.fit_transform(content)
+
+    similarity_matrix =  cosine_similarity(matrix)
+
+    match = similarity_matrix[0][1] * 100
+
+    return match
+
+
+#button 
+
+if click:
+    match = getResult(job_description,resume)
+    match = round(match,2)
+    st.write("Match Percentage: ",match,"%")
+
+
