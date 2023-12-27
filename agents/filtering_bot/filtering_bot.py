@@ -39,8 +39,6 @@ def RemoveStopwords(sentence):
     for w in word_tokens:
         if w not in stop_words:
             filtered_sentence.append(w)
-    
- 
     return filtered_sentence
 
 @filtering_bot.on_message(model=TextToFilterModel)
@@ -49,13 +47,9 @@ async def match_resume(ctx: Context, sender: str, msg: TextToFilterModel):
     job_desc=msg.job_description
     content=msg.content
 
-    #cleaning
-    resume_cleaned=transcript.replace("\n","")
-    description_cleaned=job_descr.replace("\n","")
-
     # calculate percent match
     similarity = text_similarity_bert(resume_cleaned, description_cleaned)
 
     ctx.logger.info(f"recieved {content}")
-    percent_match=69
+    percent_match=similarity
     await ctx.send(get_bot_address("IO_bot"),PercentMatchModel(percent_match=percent_match,file_name=msg.file_name))

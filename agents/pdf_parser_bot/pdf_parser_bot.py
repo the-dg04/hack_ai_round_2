@@ -4,6 +4,8 @@ from uagents.setup import fund_agent_if_low
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+
+
 from PyPDF2 import PdfReader
 import sys
 sys.path.append("../../")
@@ -45,18 +47,17 @@ def RemoveStopwords(sentence):
 @pdf_parser_bot.on_message(model=PdfToTextModel)
 async def pdf_to_text(ctx: Context, sender: str, msg: PdfToTextModel):
     pdf_file=msg.resume_address
-
+    job_desc=msg.job_description
     # convert pdf to text here
     reader = PdfReader(pdf_file)
     page = reader.pages[0]
     transcript  = page.extract_text()
     #cleaning the stopwords and newlines
     resume_cleaned=transcript.replace("\n","")
-    description_cleaned=job_description.replace("\n","")
+    description_cleaned=job_desc.replace("\n","")
     resume_cleaned = RemoveStopwords(resume_cleaned)
     description_cleaned = RemoveStopwords(description_cleaned)
 
     ctx.logger.info(f"recieved {msg.resume_address} from {ctx.name}")
     resume_text=transcript
     await ctx.send(get_bot_address("keyword_parser_bot"),TextToFilterModel(content=resume_text,job_description=msg.job_description,file_name=msg.file_name))
-
