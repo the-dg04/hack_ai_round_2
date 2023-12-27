@@ -1,5 +1,6 @@
 import streamlit as st 
 from uagents import Agent,Context,Model
+import asyncio
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -24,7 +25,17 @@ uploadedJD = st.file_uploader("Upload Job Description", type="pdf")
 
 uploadedResume = st.file_uploader("Upload resume",type="pdf",accept_multiple_files=True)
 
-click = st.button("Process")
+async def handle_click():
+    resume_file="Cape-Town-Resume-Template-Retro-Creative.pdf"
+    file_name="dsjdsjdskjkjfds.pdf"
+    job_description="job description"
+    print(get_bot_address("pdf_parser_bot"))
+    await Agent(seed="IO_bot")._ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_address=resume_file,job_description=job_description,file_name=file_name))
+
+    # await asyncio.sleep(5)
+    print("ddd")
+
+click = st.button("Process",on_click=asyncio.run(handle_click()))
 print(uploadedJD)
 
 todocomment = '''
@@ -68,13 +79,13 @@ def getResult(JD_txt,resume_txt):
 
 
 
-if click:
-    resume_file="Cape-Town-Resume-Template-Retro-Creative.pdf"
-    file_name="dsjdsjdskjkjfds.pdf"
-    job_description="job description"
-    async def send_message():
-        await Agent(seed="IO_bot")._ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_address=resume_file,job_description=job_description,file_name=file_name))
-    send_message()
+# if click:
+#     resume_file="Cape-Town-Resume-Template-Retro-Creative.pdf"
+#     file_name="dsjdsjdskjkjfds.pdf"
+#     job_description="job description"
+#     # def print_hello():
+#     #     print("hello")
+#     asyncio.run(Agent(seed="IO_bot")._ctx.send(get_bot_address("pdf_parser_bot"),PdfToTextModel(resume_address=resume_file,job_description=job_description,file_name=file_name)))
     #match = getResult(job_description,resume)
     #match = round(match,2)
     # percent_match=100
