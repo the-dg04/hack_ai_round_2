@@ -58,6 +58,7 @@ async def pdf_to_text(ctx: Context, sender: str, msg: PdfToTextModel):
     resume_cleaned = RemoveStopwords(resume_cleaned)
     description_cleaned = RemoveStopwords(description_cleaned)
 
-    ctx.logger.info(f"recieved {msg.resume_address} from {ctx.name}")
+    # ctx.logger.info(f"recieved {msg.resume_address} from {ctx.name}")
     resume_text=transcript
-    await ctx.send(get_bot_address("keyword_parser_bot"),TextToFilterModel(content=resume_text,job_description=msg.job_description,file_name=msg.file_name))
+    await ctx.send(get_bot_address("filtering_bot"),TextToFilterModel(content=resume_text,job_description=msg.job_description,file_name=msg.file_name))
+
