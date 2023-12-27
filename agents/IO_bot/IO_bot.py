@@ -28,4 +28,10 @@ async def get_input(ctx:Context):
 async def display_match(ctx: Context, sender: str, msg: PercentMatchModel):
     percent_match=msg.percent_match
     file_name=msg.file_name
+    text_color="red"
+    if(percent_match>=50):
+        text_color="yellow"
+    if(percent_match>=80):
+        text_color="green"
+    # st.write(f"{file_name}\t:{text_color}[{percent_match}% match]")
     # print name and percent match
