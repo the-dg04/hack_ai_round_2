@@ -7,10 +7,12 @@ from utils.utils import get_bot_address
 class TextToKeywordsModel(Model):
     content:str
     job_description:str
+    file_name:str
 
 class KeywordsToMatchModel(Model):
     keywords:str
     job_description:str
+    file_name:str
 
 keyword_parser_bot=Agent(name="keyword_parser_bot",seed="keyword_parser_bot",port=8073,endpoint=["http://127.0.0.1:8073/submit"])
 fund_agent_if_low(keyword_parser_bot.wallet.address())
@@ -22,4 +24,4 @@ async def pdf_to_text(ctx: Context, sender: str, msg: TextToKeywordsModel):
     # convert text to keywords
 
     keywords="sample keywords"
-    await ctx.send(get_bot_address("filtering_bot"),KeywordsToMatchModel(content,msg.job_description))
+    await ctx.send(get_bot_address("filtering_bot"),KeywordsToMatchModel(content,msg.job_description,msg.file_name))
