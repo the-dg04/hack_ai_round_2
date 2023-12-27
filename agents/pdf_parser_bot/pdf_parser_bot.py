@@ -16,6 +16,7 @@ class TextToKeywordsModel(Model):
 
 pdf_parser_bot=Agent(name="pdf_parser_bot",seed="pdf_parser_bot",port=8072,endpoint=["http://127.0.0.1:8072/submit"])
 fund_agent_if_low(pdf_parser_bot.wallet.address())
+print(get_bot_address("pdf_parser_bot"))
 
 @pdf_parser_bot.on_message(model=PdfToTextModel)
 async def pdf_to_text(ctx: Context, sender: str, msg: PdfToTextModel):
@@ -25,4 +26,3 @@ async def pdf_to_text(ctx: Context, sender: str, msg: PdfToTextModel):
     ctx.logger.info(f"recieved {msg.resume_address} from {ctx.name}")
     resume_text="sample text"
     await ctx.send(get_bot_address("keyword_parser_bot"),TextToKeywordsModel(content=resume_text,job_description=msg.job_description,file_name=msg.file_name))
-
