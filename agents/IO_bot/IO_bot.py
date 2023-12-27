@@ -1,5 +1,7 @@
 from uagents import Agent,Context,Model
 from uagents.setup import fund_agent_if_low
+
+import streamlit as st 
 import sys
 sys.path.append("../../")
 from utils.utils import get_bot_address
@@ -19,6 +21,22 @@ fund_agent_if_low(IO_bot.wallet.address())
 @IO_bot.on_event("startup")
 async def get_input(ctx:Context):
     # get file from ui
+    st.title("Automated Resume Screening and Matching Agent")
+
+    st.markdown("<h1 style=\"color:red;\">woh</h1>",unsafe_allow_html=True)
+
+    st.caption("""Aim is to Develop an agent that can intelligently
+    screen and match resumes with job descriptions. The agent should use natural language
+    processing (NLP) and machine learning techniques to understand the requirements listed in a
+    job description and evaluate resumes based on these criteria.""")
+
+    uploadedJD = st.file_uploader("Upload Job Description", type="pdf")
+
+    uploadedResume = st.file_uploader("Upload resume",type="pdf",accept_multiple_files=True)
+
+    click = st.button("Process")
+    print(uploadedJD)
+
     resume_file="Cape-Town-Resume-Template-Retro-Creative.pdf"
     file_name="dsjdsjdskjkjfds.pdf"
     job_description="job description"
@@ -33,5 +51,5 @@ async def display_match(ctx: Context, sender: str, msg: PercentMatchModel):
         text_color="yellow"
     if(percent_match>=80):
         text_color="green"
-    # st.write(f"{file_name}\t:{text_color}[{percent_match}% match]")
+    st.write(f"{file_name}\t:{text_color}[{percent_match}% match]")
     # print name and percent match
