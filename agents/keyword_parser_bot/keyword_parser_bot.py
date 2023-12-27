@@ -23,5 +23,6 @@ async def pdf_to_text(ctx: Context, sender: str, msg: TextToKeywordsModel):
 
     # convert text to keywords
 
+    ctx.logger.info(f"recieved {content}")
     keywords="sample keywords"
-    await ctx.send(get_bot_address("filtering_bot"),KeywordsToMatchModel(content,msg.job_description,msg.file_name))
+    await ctx.send(get_bot_address("filtering_bot"),KeywordsToMatchModel(keywords=keywords,job_description=msg.job_description,file_name=msg.file_name))

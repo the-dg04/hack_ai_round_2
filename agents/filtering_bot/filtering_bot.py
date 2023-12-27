@@ -10,7 +10,7 @@ class KeywordsToMatchModel(Model):
     file_name:str
 
 class PercentMatchModel(Model):
-    percent_match:str
+    percent_match:float
     file_name:str
 
 filtering_bot=Agent(name="filtering_bot",seed="filtering_bot",port=8071,endpoint=["http://127.0.0.1:8071/submit"])
@@ -22,6 +22,6 @@ async def match_resume(ctx: Context, sender: str, msg: KeywordsToMatchModel):
     job_desc=msg.job_description
 
     # calculate percent match
-
+    ctx.logger.info(f"recieved {keywords}")
     percent_match=69
-    await ctx.send(get_bot_address("IO_bot"),PercentMatchModel(percent_match,msg.file_name))
+    await ctx.send(get_bot_address("IO_bot"),PercentMatchModel(percent_match=percent_match,file_name=msg.file_name))
