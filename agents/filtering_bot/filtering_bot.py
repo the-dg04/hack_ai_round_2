@@ -56,6 +56,6 @@ async def match_resume(ctx: Context, sender: str, msg: TextToFilterModel):
     # calculate percent match
     similarity = text_similarity_bert(resume_cleaned, description_cleaned)
 
-    ctx.logger.info(f"recieved {content}")
-    percent_match=69
-    await ctx.send(get_bot_address("IO_bot"),PercentMatchModel(percent_match=percent_match,file_name=msg.file_name))
+    # ctx.logger.info(f"recieved {msg.content}")
+    # percent_match=69
+    await ctx.send(get_bot_address("IO_bot"),PercentMatchModel(percent_match=percent_match,file_name="msg.file_name"))

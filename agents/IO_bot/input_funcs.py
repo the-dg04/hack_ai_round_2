@@ -1,6 +1,6 @@
 import os
 def get_resumes():
-    files=os.listdir(os.path.join(os.getcwd(),"input_resumes"))
+    files=os.listdir(os.path.join(os.getcwd(),"agents\IO_bot\input_resumes"))
     resumes=[]
     for f in files:
         if(f!='job_description.txt'):
@@ -9,7 +9,7 @@ def get_resumes():
 
 def get_job_description():
     try:
-        with open(os.path.join(os.getcwd(),"input_resumes",'job_description.txt'),"r") as f:
+        with open(os.path.join(os.getcwd(),"agents\IO_bot\input_resumes",'job_description.txt'),"r") as f:
           return f.read()
     except:
         return False
