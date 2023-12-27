@@ -4,12 +4,19 @@ Installation
 `pip install -r requirements.txt`
 2. Write the job description into job_description.txt according to which the filtering is to be done.
 3. Save all the PDFs of the resumes into the agents/IO_bot/input resumes folder
-4. Run main.py
-5. That's it! Now you will receive the compolete
+4. Now you can Run main.py
+5. That's it! Now you will receive the complete ranking of the resumes filtered according to the job description. 
 
 
+We approached the problem statement by generating scores for each resume corresponding to the job description, where a higher score corresponds to a more suitable candidate. 
 
-For our approach to the problem statement we use the flow of the following uAgents 
+First we begin by extracting text from the resume and preprocessing the text for further analysis using nltk.
+Text embeddings are generated using pretrained paraphrase-MiniLM-L6-v2. 
+
+To check similarity, we compare the embeddings using cosine similarity and then create a ranking based the cosine similarity scores.
+
+
+In our approach to the problem statement we use the flow of the following uAgents 
 
 IObot: This uAgent handles all of the input_operations and output_operations.
 IObot is the first agent that is initialised on startup, and communicates with the Streamlit interface. It receives the Job Description pdf file and resume files to be filtered from the interface. Thus, the IObot messages these to the pdf_parser_bot
