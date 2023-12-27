@@ -23,7 +23,7 @@ async def get_input(ctx:Context):
     # get file from ui
     st.title("Automated Resume Screening and Matching Agent")
 
-    st.markdown("<h1 style=\"color:red;\">woh</h1>",unsafe_allow_html=True)
+    
 
     st.caption("""Aim is to Develop an agent that can intelligently
     screen and match resumes with job descriptions. The agent should use natural language
